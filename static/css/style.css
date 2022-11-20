@@ -1,0 +1,126 @@
+body {
+    background-color: #002b44;
+    color: white;
+}
+
+select {
+	background-color: white;
+	border: 2px solid black;
+	padding: 10px;
+}
+
+.navbar-custom {
+    background-color: orange;
+    
+}
+
+.titre {
+    font-family: "Gill Sans", sans-serif;
+    
+        padding: 20px;
+        text-decoration: underline;
+        font-weight: bold;
+        color: white;
+   
+}
+
+.titre b {
+    color: gold;
+}
+
+.doodle {
+    color: #002b44;
+}
+
+.joueurs_infos {
+
+    display: none; border: 1px solid black;
+} 
+
+.joueurs_infos:hover {
+    cursor: pointer;
+}
+
+.inscrits {
+    background-color: yellow;
+    padding: 10px;
+}
+
+.inscrits.valide {
+    background-color: chartreuse;
+}
+
+.btn {
+    border-radius: 0;
+	border: 2px solid black;
+}
+
+.btn-classic {
+    background-color: white;
+    color: black;
+}
+
+.btn-supprimer {
+    background-color: crimson;
+    color: white;
+}
+
+.btn-present {
+    background-color: chartreuse;
+    color: black;
+}
+
+
+.btn-annule {
+    background-color: gold;
+}
+
+.btn-inscrire {
+    background-color: cadetblue;
+    color: white;
+}
+
+.editer {
+    float: right;
+}
+
+.present {
+background-color: chartreuse;
+}
+
+.Présent {
+    background-color: chartreuse;
+    }
+
+.Absent {
+background-color: #ec5372;
+}
+
+.Incertain {
+background-color: blueviolet;
+color: white;
+}
+
+.retard {
+background-color: gold;
+}
+
+._404 {
+    font-weight: bold;
+    background-color: gold;
+}
+
+._404 a {
+    color: black;
+}
+
+._404 .contenu {
+    padding: 70px;
+    text-align: center;
+
+}
+
+._404 h2 {
+    font-weight: bold;
+    text-decoration: underline;
+}

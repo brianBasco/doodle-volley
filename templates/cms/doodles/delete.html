@@ -1,0 +1,19 @@
+{% extends 'app.html' %}
+
+{% block content %}
+
+<div class="container">
+    <h1>Valider la suppression</h1>
+</div>
+
+<div class="container">
+    <p>supprimer {{ objet }}</p>
+</div>
+
+<div class="container">
+<form action="{{ url_for('delete_'+ nom, id=objet.id) }}" method="POST">
+    <p><a class="btn btn-danger" href="{{ url_for('get_'+nom+'s') }}">Non</a></p>
+    <input class="btn btn-classic" type="submit" value="Oui">
+</form>
+</div>
+{% endblock %}

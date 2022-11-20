@@ -1,0 +1,48 @@
+{% extends 'app.html' %}
+
+{% block content %}
+
+<div class="container">
+    <h1>{{ titre }}</h1>
+</div>
+
+<div class="container">
+{% from "_formhelpers.html" import render_field %}
+<form method=post>
+    <dl>
+        {{ render_field(form.nom) }}
+        {{ render_field(form.presence) }}
+    </dl>
+    <p><input class="btn btn-outline-success" type=submit value="enregistrer">
+</form>
+
+
+
+
+
+
+
+</div>
+{% if id %}
+
+    <div class="fixed-bottom">
+
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+  <a class="btn btn-classic btn-supprimer" href="{{ url_for('ui_delete_joueur', id=id) }}">Supprimer</a>
+</div>
+
+
+        </div>
+
+
+
+
+
+
+
+
+    </div>
+{% endif %}
+
+{% endblock %}

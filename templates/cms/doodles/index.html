@@ -1,0 +1,54 @@
+{% extends 'app.html' %}
+
+{% block content %}
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+<div class="container">
+    {% for category, message in messages %}
+    <div class="alert alert-{{ category }}">
+        {{ message }}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endwith %}
+
+<div class="container">
+    <h1>Liste des Doodles</h1>
+</div>
+
+<div class="container">
+    <a href="{{ url_for('register_doodle')}}" class="btn btn-primary">+</a>
+</div>
+
+<div class="container">
+    <table class="table table-sm">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>jour</th>
+                <th>edit</th>
+                <th>delete</th>
+            </tr>
+
+        </thead>
+        <tbody>
+            {% for doodle in doodles %}
+
+            <tr>
+                <td>
+                    {{ doodle['id'] }}
+                </td>
+                <td>{{ doodle['date_doodle'].strftime('%d/%m/%Y') }}</td>
+                <td><a class="btn btn-primary" href="{{ url_for('edit_doodle', id=doodle.id) }}">Editer</a></td>
+                <td><a class="btn btn-warning" href="{{ url_for('delete_doodle', id=doodle.id) }}">X</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+</div>
+
+
+{% endblock %}

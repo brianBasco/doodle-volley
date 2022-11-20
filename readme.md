@@ -1,0 +1,1 @@
+a faire : implémenter activate connexion dans app

@@ -1,0 +1,88 @@
+{% extends 'app.html' %}
+
+{% block content %}
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+<div class="container">
+    {% for category, message in messages %}
+    <div class="alert alert-{{ category }}">
+        {{ message }}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endwith %}
+
+<div class="container">
+
+    <h1 class="titre">Doodle</h1>
+
+
+
+    <hr>
+
+    {% for doodle in doodles %}
+
+    {% set liste_presents = doodle.joueurs | selectattr("presence", "equalto", 'Présent') | list | count %}
+    {% set liste_retards = doodle.joueurs | selectattr("presence", "equalto", 'En retard') | list | count %}
+    {% set liste_incertains = doodle.joueurs | selectattr("presence", "equalto", 'Incertain') | list | count %}
+    {% set liste_absents = doodle.joueurs | selectattr("presence", "equalto", 'Absent') | list | count %}
+    {% set inscrits = liste_presents + liste_retards %}
+    {% set vide = (inscrits + liste_incertains + liste_absents == 0) %}
+    {% set jours = ["lundi","mardi","mercredi","jeudi","vendredi","samedi","dimanche"] %}
+
+
+    <div class="container doodle">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <span>{{ jours[doodle.date_doodle.weekday()] }} </span>
+                <span>{{ doodle.date_doodle.strftime("%d/%m/%Y") }}</span>
+
+
+                <span><button
+                        class="btn dropdown-toggle {% if inscrits >= 6 %} btn-present {% else %} btn-annule {% endif %}"
+                        onclick='ouvre_liste("{{doodle.id}}")'>{{ inscrits }} inscrit{% if inscrits > 1
+                        %}s{%
+                        endif %}</button></span>
+                 <span><a class="btn btn-inscrire"
+                         href="{{ url_for('ui_register_joueur', doodle=doodle.id) }}">S'inscrire</a></span> 
+                         
+            </li>
+
+
+
+
+            <ul class="list-group joueurs_infos_{{ doodle.id }}" style="display: none">
+                {% for statut,css in [('Présent', 'present'), ('En retard','retard'), ('Incertain', 'incertain'),
+                ('Absent',
+                'absent')] %}
+                {% set joueurs = doodle.joueurs | selectattr("presence", "equalto", statut) | list %}
+                {% for joueur in joueurs %}
+
+                <li
+                    class="list-group-item {% if joueur.presence == 'En retard' %} retard {% else %} {{ joueur.presence }} {% endif %}">
+                    <span>{{ joueur.nom }}</span>
+                    {% if joueur.presence != 'Présent' %}
+                    <span>{{ joueur.presence }}</span>
+                    {% endif %}
+                    <span><a class="editer btn btn-classic"
+                            href="{{ url_for('ui_edit_joueur', id=joueur.id) }}">Editer</a></span>
+                </li>
+                {% endfor %}
+                {% endfor %}
+
+            </ul>
+        </ul>
+
+
+
+    </div>
+
+    <hr>
+
+    {% endfor %}
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'app.html' %}
+
+{% block content %}
+
+{% from "_formhelpers.html" import render_field %}
+
+<div class="container">
+  <form method=post>
+    {% for field in form %}
+    <dl>
+      {{ render_field(field) }}
+    </dl>
+    {% endfor %}
+    
+    <p><input class="btn btn-classic" type=submit value="enregistrer">
+  </form>
+</div>
+
+
+  {% endblock %}
